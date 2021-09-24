@@ -1,0 +1,5 @@
+ErrorDocument 404 /sistema/ERRORS/403.shtml
+ErrorDocument 404 /sistema/ERRORS/404.shtml
+ErrorDocument 500 /sistema/ERRORS/500.shtml
+ErrorDocument 503 /sistema/ERRORS/503.shtml
+ErrorDocument 504 /sistema/ERRORS/508.shtml
