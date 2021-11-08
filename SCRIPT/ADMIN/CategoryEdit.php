@@ -8,7 +8,7 @@ if(isset($_POST['cat-edit-submit'])) {
     session_start();
     //print_r($_SESSION);
     $CatID = $_SESSION['cat-id'];
-    $name_edit = $_POST['cat-edit-name'];
+    $name_edit = filter_var($_POST['cat-edit-name'], FILTER_SANITIZE_STRING);
     $query = "UPDATE categories SET NAME_CAT = '$name_edit' WHERE ID_CAT = $CatID";
     $result = mysqli_query($mysqli, $query);
     if($result == 1) {
@@ -19,7 +19,7 @@ if(isset($_POST['cat-edit-submit'])) {
     session_start();
     //print_r($_SESSION);
     $CatID = $_SESSION['cat-id'];
-    $name_edit = $_POST['cat-edit-name'];
+    $name_edit = filter_var($_POST['cat-edit-name'], FILTER_SANITIZE_STRING);
     echo $query = "INSERT INTO categories (NAME_CAT) VALUES ('$name_edit')";
     $result = mysqli_query($mysqli, $query);
     if($result == 1) {
@@ -30,7 +30,7 @@ if(isset($_POST['cat-edit-submit'])) {
     session_start();
     //print_r($_SESSION);
     $CatID = $_SESSION['cat-id'];
-    $name_edit = $_POST['cat-edit-name'];
+    $name_edit = filter_var($_POST['cat-edit-name'], FILTER_SANITIZE_STRING);
     echo $query = "DELETE FROM categories WHERE ID_CAT = $CatID";
     $result = mysqli_query($mysqli, $query);
     if($result == 1) {

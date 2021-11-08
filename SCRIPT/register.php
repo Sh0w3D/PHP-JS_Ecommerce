@@ -1,12 +1,11 @@
 <?php
 
 include('conn.php');
-
 if(isset($_POST['register'])) {
     // Define variables from
-    $user = $_POST['user'];
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
+    $user = filter_var($_POST['user'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+    $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
     $query = "SELECT email_US FROM users WHERE email_Us = '$email'";
     $result = mysqli_query($mysqli, $query);
     $info = mysqli_fetch_array($result);

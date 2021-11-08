@@ -1,9 +1,3 @@
-<?php
-session_start();
-if($_SESSION['role'] != 1) {
-    header('Location: user-panel.php');
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -50,10 +44,11 @@ if($_SESSION['role'] != 1) {
     <input type="submit" class="btn btn-light" value="Edytuj" name="admin-controls-edit">
     </form>';
 
-    //session_destroy();
+    $table_select = $_GET['admin-select-table'];
+    session_destroy();
+    session_start();
+    $_SESSION['table'] = $table_select;
     if(isset($_GET['AdminConfirmSelect'])) {
-        session_start();
-        $_SESSION['table'] = $_GET['admin-select-table'];
         echo $db_operation_buttons;
     } else {
         //echo 'admin-select-table not set';

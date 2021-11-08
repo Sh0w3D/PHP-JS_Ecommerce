@@ -4,9 +4,9 @@ include('conn.php');
 
 if(isset($_POST['login'])) {
     // Define user variables, connect and check in database user
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
-    print_r($_POST);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
+    //print_r($_POST);
     $query = "SELECT * FROM users WHERE email_US = '$email'";
     $result = mysqli_query($mysqli, $query);
     // Check if there is one user names as in $user
@@ -14,14 +14,16 @@ if(isset($_POST['login'])) {
 
     if ($rows == 1) {
         //Get data from db to 
-        $query = "SELECT user_US, pass_US, email_US, role_US, confirmed_US FROM users WHERE email_Us = '$email'";
+        $query = "SELECT ID_US, user_US, pass_US, email_US, role_US, confirmed_US FROM users WHERE email_Us = '$email'";
         $result = mysqli_query($mysqli, $query);
         $info = mysqli_fetch_array($result);
         // Create sessions
         session_start();
+        $_SESSION['UserID'] = $info['ID_US'];
         $_SESSION['user'] = $info['user_US'];
         $_SESSION['role'] = $info['role_US'];
         $_SESSION['email'] = $info['email_US'];
+        //$_SESSION['pass'] = $info['pass_US'];
         //print_r($_SESSION);
         $hash = $info['pass_US'];
         $role = $info['role_US'];

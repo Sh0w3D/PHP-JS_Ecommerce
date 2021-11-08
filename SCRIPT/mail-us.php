@@ -1,8 +1,8 @@
 <?php
 $to = "qaqoil122@gmail.com";
 $subject = "User message system!";
-$from = $_POST['email-sender'];
-$text = $_POST['mail-content'];
+$from = filter_var($_POST['email-sender'], FILTER_SANITIZE_EMAIL);
+$text = filter_var($_POST['mail-content'], FILTER_SANITIZE_STRING);
 
 if(isset($_POST['send-mail'])) {
     $message = $text;
